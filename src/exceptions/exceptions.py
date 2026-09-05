@@ -1,0 +1,1 @@
+class InvalidTrainDataException(Exception):pass
