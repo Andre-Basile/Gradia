@@ -73,7 +73,6 @@ if __name__ == '__main__':
 
         # CREATING MODEL AND OPERATIONS MAKING
         model = get_model(regression_models.index(choice), max_iter=20500, tolerance=1070)
-        print(f"NOMBRES DES ITERATIONS AU DEPART : {model.iterations}")
 
         scaler = StandardScaler()
         scaler.fit(X_train=X_train)
@@ -86,34 +85,7 @@ if __name__ == '__main__':
 
         y_predicted = model.predict(X_test_normalized)
         print("Predictions :")
-        for p, r in zip(y_predicted, Y_test): print(f"\t Prédit : {str(p):<20} -- Réel : {str(r):<15} >> écart : {abs(r - p)}")
-
-        def mse(prediction, real):
-            prediction = np.asarray(prediction).ravel()
-            real = np.asarray(real).ravel()
-            if prediction.shape != real.shape:
-                raise ValueError(f"Prediction and target shapes differ: {prediction.shape} != {real.shape}")
-            return np.mean((real - prediction) ** 2)
-
-        # affichages
-
-        y_train_predictions = model.predict(X=X_train_normalized)
-        train_mse = mse(y_train_predictions, Y_train)
-        test_mse =  mse(y_predicted, Y_test)
-
-        print("Train MSE :", train_mse)
-        print("Test MSE  :", test_mse)
-
-        print("Train RMSE :", np.sqrt(train_mse))
-        print("Test RMSE  :", np.sqrt(test_mse))
-
-        # 
-        print(f"NOMBRES DES ITERATIONS ATTEINTES : {model.iterations}")
-        #tolerances = [1070, 1075, 1080]
-        
-       # test_lot_tolerances(tolerances=tolerances, model=model, X_train=X_train, X_test=X_test, Y_train=Y_train, Y_test=Y_test)
-        
-        
+        for index, value in enumerate(y_predicted): print(f"\t For X{index+1} , Y = {str(value)}")
 
     except Exception as e:
         print(e)

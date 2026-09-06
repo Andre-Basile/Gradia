@@ -63,26 +63,3 @@ class Gradia(Model0):
     def predict(self, X):
         if not self.model_trained: raise Exception('Model not trained first.Call the \'train\' function.')
         return np.array([self.f(row.reshape(1, row.shape[0])) for row in X])
-   
-
-
-if __name__ == '__main__':
-
-
-
-
-
-
-
-    model = Gradia()
-    X = np.arange(20).reshape(4, 5)
-    Y = np.arange(4).reshape(4, 1)
-
-    # entrainer le modèle 
-    model.train(X, Y)
-    x_test = np.array([[20, 21, 22, 23, 24]])
-
-    print('\nPREDICTIONS SUR X = ', x_test)
-    p = model.predict(x_test)
-    print('y =',p)
-    # draw(m.losses,xlabel='itérations', ylabel='loss', title='Losses function') 
